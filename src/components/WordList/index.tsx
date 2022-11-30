@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useWord } from "../../contexts/word";
 import { dictionaryApi } from "../../services/dictionaryApi";
-import { getWords } from "../../services/getWords";
 import { wordsData } from "../../../database/words";
 import * as S from "./styles";
 import api from "../../services/api";
