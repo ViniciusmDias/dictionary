@@ -79,7 +79,7 @@ export const List = styled.div`
     border-radius: 0;
     border: 1px solid ${(props) => props.theme["black"]};
     background-color: ${(props) => props.theme["white"]};
-    padding: 0.75rem 0.5rem;
+    padding: 1rem 0.5rem;
 
     &:focus {
       background-color: ${(props) => props.theme["gray"]};
