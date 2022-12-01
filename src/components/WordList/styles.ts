@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const WordListContainer = styled.header`
+export const WordListContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -51,25 +51,21 @@ export const WordListContent = styled.div`
 
   @media (min-width: 768px) {
     height: 65vh;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 0;
     border: 1px solid ${(props) => props.theme["black"]};
   }
 `;
 
 export const List = styled.div`
-  flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin-top: 1rem;
   border: 1px solid ${(props) => props.theme["black"]};
-  border-top: none;
-  border-right: none;
   overflow: auto;
 
   @media (min-width: 768px) {
     margin-top: 0;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    height: 100%;
   }
 
   button {
@@ -84,14 +80,5 @@ export const List = styled.div`
     &:focus {
       background-color: ${(props) => props.theme["gray"]};
     }
-  }
-
-  button:first-child {
-    border-left: none;
-    border-bottom: none;
-  }
-  button + button {
-    border-left: none;
-    border-bottom: none;
   }
 `;

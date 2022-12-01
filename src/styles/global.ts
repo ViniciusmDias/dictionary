@@ -24,6 +24,11 @@ export const GlobalStyle = createGlobalStyle`
 
   button {
     cursor: pointer;
+    transition: all 0.4 ease;
+    
+    :hover {
+      opacity: 0.5;
+    }
   }
 
 `;

@@ -6,7 +6,7 @@ export function TextBox() {
 
   return (
     <TextBoxContainer>
-      {!selectWord ? <p>a</p> : <h3>{selectWord}</h3>}
+      <h3>{selectWord}</h3>
       <h4>{phonetic}</h4>
     </TextBoxContainer>
   );

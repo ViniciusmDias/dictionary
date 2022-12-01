@@ -16,6 +16,8 @@ type WordContextData = {
   setAudio: Dispatch<SetStateAction<string>>;
   meanings: string[];
   setMeanings: Dispatch<SetStateAction<string[]>>;
+  favoriteWords: string[];
+  setFavoriteWords: Dispatch<SetStateAction<string[]>>;
 };
 
 export const WordContext = createContext({} as WordContextData);
@@ -27,10 +29,11 @@ type WordContextProviderProps = {
 export const WordProvider: React.FC<WordContextProviderProps> = ({
   children,
 }: WordContextProviderProps) => {
-  const [selectWord, setSelectedWord] = useState("Hello");
+  const [selectWord, setSelectedWord] = useState("");
   const [phonetic, setPhonetic] = useState("");
   const [audio, setAudio] = useState("");
   const [meanings, setMeanings] = useState<string[]>([]);
+  const [favoriteWords, setFavoriteWords] = useState<string[]>([]);
 
   return (
     <WordContext.Provider
@@ -43,6 +46,8 @@ export const WordProvider: React.FC<WordContextProviderProps> = ({
         setAudio,
         meanings,
         setMeanings,
+        favoriteWords,
+        setFavoriteWords,
       }}
     >
       {children}

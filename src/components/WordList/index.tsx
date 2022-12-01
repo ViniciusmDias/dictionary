@@ -7,8 +7,12 @@ import * as S from "./styles";
 export function WordList() {
   const [loading, setLoading] = useState(true);
   const [words, setWords] = useState<string[]>([]);
+  const [historicWords, setHistoricWords] = useState<string[]>([]);
 
-  const { setSelectedWord, setPhonetic, setAudio, setMeanings } = useWord();
+  const [tab, setTab] = useState("wordlist");
+
+  const { setSelectedWord, setPhonetic, setAudio, setMeanings, favoriteWords } =
+    useWord();
 
   const setWordInfo = useCallback(async (word: string) => {
     try {
@@ -27,9 +31,6 @@ export function WordList() {
       const newAudio = firstWord.phonetics
         .map((phonetic) => phonetic.audio)
         .filter(Boolean)[0];
-
-      console.log(firstWord);
-      console.log(newAudio);
 
       const newPhonetic = firstWord.phonetic;
 
@@ -50,12 +51,20 @@ export function WordList() {
       if (wordMeanings.length > 0) {
         setMeanings(wordMeanings);
       }
+
+      setHistoricWords((historicWords) => [...historicWords, firstWord.word]);
+
+      localStorage.setItem(
+        "@dictionary:historic",
+        JSON.stringify(historicWords)
+      );
     } catch (error) {}
   }, []);
 
   const setWordListInfo = useCallback(async () => {
     setLoading(true);
     const newWords = await getWords(100);
+
     if (newWords) {
       setWords(newWords);
     }
@@ -64,28 +73,51 @@ export function WordList() {
   }, []);
 
   useEffect(() => {
+    if (historicWords.length === 0) {
+      const historic = window.localStorage.getItem("@dictionary:historic");
+
+      if (historic) {
+        setHistoricWords(JSON.parse(historic));
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     setWordListInfo();
   }, [setWordListInfo]);
   return (
     <S.WordListContainer>
       <S.WordListHeader>
-        <button>Word list</button>
-        <button>History</button>
-        <button>Favorites</button>
+        <button onClick={() => setTab("wordlist")}>Word list</button>
+        <button onClick={() => setTab("historic")}>History</button>
+        <button onClick={() => setTab("favorites")}>Favorites</button>
       </S.WordListHeader>
       <S.WordListContent>
         <h5>Word list</h5>
-        <S.List>
-          {loading ? (
-            <p>Carregando...</p>
-          ) : (
-            words.map((word) => (
-              <button key={word} onClick={() => setWordInfo(word)}>
-                {word}
-              </button>
-            ))
-          )}
-        </S.List>
+        {loading ? (
+          <p>Carregando...</p>
+        ) : (
+          <S.List>
+            {tab === "wordlist" &&
+              words.map((word) => (
+                <button key={word} onClick={() => setWordInfo(word)}>
+                  {word}
+                </button>
+              ))}
+            {tab === "historic" &&
+              historicWords.map((word) => (
+                <button key={word} onClick={() => setWordInfo(word)}>
+                  {word}
+                </button>
+              ))}
+            {tab === "favorites" &&
+              favoriteWords.map((word) => (
+                <button key={word} onClick={() => setWordInfo(word)}>
+                  {word}
+                </button>
+              ))}
+          </S.List>
+        )}
       </S.WordListContent>
     </S.WordListContainer>
   );
