@@ -1,5 +1,3 @@
-import { Header } from "../../components/Header";
-import { FiX } from "react-icons/fi";
 import * as S from "./styles";
 import { TextBox } from "../../components/TextBox";
 import { Audio } from "../../components/Audio";
@@ -8,22 +6,19 @@ import { WordList } from "../../components/WordList";
 
 export function Dictionary() {
   return (
-    <>
-      <Header />
-      <S.Container>
-        <S.WordSection>
-          <TextBox />
-          <Audio />
-          <Meanings />
-          <S.ButtonsContainer>
-            <button>Voltar</button>
-            <button>Próximo</button>
-          </S.ButtonsContainer>
-        </S.WordSection>
-        <S.WordListSection>
-          <WordList />
-        </S.WordListSection>
-      </S.Container>
-    </>
+    <S.Container>
+      <S.WordSection>
+        <TextBox />
+        <Audio />
+        <Meanings />
+        <S.ButtonsContainer>
+          <button>Voltar</button>
+          <button>Próximo</button>
+        </S.ButtonsContainer>
+      </S.WordSection>
+      <S.WordListSection>
+        <WordList />
+      </S.WordListSection>
+    </S.Container>
   );
 }
