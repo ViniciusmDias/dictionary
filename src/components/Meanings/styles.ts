@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MeaningsContainer = styled.header`
+export const MeaningsContainer = styled.div`
   max-height: 10rem;
   display: flex;
   flex-direction: column;

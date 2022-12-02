@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FavoriteContainer = styled.header`
+export const FavoriteContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

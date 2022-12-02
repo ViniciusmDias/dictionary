@@ -13,10 +13,11 @@ export function Dictionary() {
         <TextBox />
         <Audio />
         <Meanings />
-        <S.ButtonsContainer>
+        <S.ButtonsContainer className="disable">
           <button>Voltar</button>
           <button>Próximo</button>
         </S.ButtonsContainer>
+        <p>We don't have this functionality yet. 😥 </p>
       </S.WordSection>
       <S.WordListSection>
         <WordList />

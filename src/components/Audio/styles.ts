@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AudioContainer = styled.header`
+export const AudioContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,6 +18,7 @@ export const AudioContainer = styled.header`
   }
 
   p {
+    margin-top: 0.5rem;
     font-size: 0.75rem;
     font-weight: bold;
   }

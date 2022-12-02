@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useWord } from "../../contexts/word";
 import { dictionaryApi } from "../../services/dictionaryApi";
 import { getWords } from "../../services/getWords";
+import { wordsData } from "../../../database/words";
 import * as S from "./styles";
+import api from "../../services/api";
 
 export function WordList() {
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ export function WordList() {
   const { setSelectedWord, setPhonetic, setAudio, setMeanings, favoriteWords } =
     useWord();
 
-  const setWordInfo = useCallback(async (word: string) => {
+  const setWordInfo = useCallback(async (word: string, historic: string[]) => {
     try {
       const response = await dictionaryApi.get(word);
       const firstWord: Word = response.data[0];
@@ -52,24 +54,30 @@ export function WordList() {
         setMeanings(wordMeanings);
       }
 
-      setHistoricWords((historicWords) => [...historicWords, firstWord.word]);
+      historic.push(firstWord.word);
 
-      localStorage.setItem(
-        "@dictionary:historic",
-        JSON.stringify(historicWords)
-      );
-    } catch (error) {}
+      localStorage.setItem("@dictionary:historic", JSON.stringify(historic));
+      setHistoricWords(historic);
+    } catch (error) {
+      alert("This word was not found in our vocabulary, try another word 😥");
+    }
   }, []);
 
-  const setWordListInfo = useCallback(async () => {
+  const setWordListInfo = useCallback(async (newLimit: number) => {
     setLoading(true);
-    const newWords = await getWords(100);
+    try {
+      const newWords = await api.get(`/words?_limit=${newLimit}`);
 
-    if (newWords) {
+      if (newWords) {
+        setWords(newWords.data);
+      }
+    } catch {
+      const newWords = wordsData;
+
       setWords(newWords);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -83,7 +91,7 @@ export function WordList() {
   }, []);
 
   useEffect(() => {
-    setWordListInfo();
+    setWordListInfo(200);
   }, [setWordListInfo]);
   return (
     <S.WordListContainer>
@@ -97,26 +105,37 @@ export function WordList() {
         {loading ? (
           <p>Carregando...</p>
         ) : (
-          <S.List>
-            {tab === "wordlist" &&
-              words.map((word) => (
-                <button key={word} onClick={() => setWordInfo(word)}>
-                  {word}
-                </button>
-              ))}
-            {tab === "historic" &&
-              historicWords.map((word) => (
-                <button key={word} onClick={() => setWordInfo(word)}>
-                  {word}
-                </button>
-              ))}
-            {tab === "favorites" &&
-              favoriteWords.map((word) => (
-                <button key={word} onClick={() => setWordInfo(word)}>
-                  {word}
-                </button>
-              ))}
-          </S.List>
+          <>
+            <S.List>
+              {tab === "wordlist" &&
+                words.map((word) => (
+                  <button
+                    key={word}
+                    onClick={() => setWordInfo(word, historicWords)}
+                  >
+                    {word}
+                  </button>
+                ))}
+              {tab === "historic" &&
+                historicWords.map((word) => (
+                  <button
+                    key={word}
+                    onClick={() => setWordInfo(word, historicWords)}
+                  >
+                    {word}
+                  </button>
+                ))}
+              {tab === "favorites" &&
+                favoriteWords.map((word) => (
+                  <button
+                    key={word}
+                    onClick={() => setWordInfo(word, historicWords)}
+                  >
+                    {word}
+                  </button>
+                ))}
+            </S.List>
+          </>
         )}
       </S.WordListContent>
     </S.WordListContainer>
