@@ -1,10 +1,15 @@
+import { useWord } from "../../contexts/word";
 import { MeaningsContainer } from "./styles";
 
 export function Meanings() {
+  const { meanings } = useWord();
+
   return (
     <MeaningsContainer>
       <h1>Meanings</h1>
-      <h4>Verb - "Hello" or an equivalent greeting</h4>
+      {meanings.map((meaning) => (
+        <h4 key={meaning}>{meaning}</h4>
+      ))}
     </MeaningsContainer>
   );
 }

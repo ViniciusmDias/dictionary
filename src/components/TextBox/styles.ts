@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const TextBoxContainer = styled.header`
+export const TextBoxContainer = styled.div`
   margin-top: 1rem;
   display: flex;
   flex-direction: column;

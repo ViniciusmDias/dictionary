@@ -21,6 +21,11 @@ export const WordSection = styled.section`
     width: 40vw;
     margin-right: 3rem;
   }
+  p {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -41,6 +46,12 @@ export const ButtonsContainer = styled.div`
     & + button {
       margin-left: 0.5rem;
     }
+  }
+
+  &.disable {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.2;
   }
 `;
 

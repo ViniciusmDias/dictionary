@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-export const MeaningsContainer = styled.header`
+export const MeaningsContainer = styled.div`
+  max-height: 10rem;
   display: flex;
   flex-direction: column;
   margin: 0.5rem 0;
+  overflow: auto;
 
   h4 {
     margin: 1rem 0 0.5rem;
