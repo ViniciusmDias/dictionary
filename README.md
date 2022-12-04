@@ -42,24 +42,22 @@ Sometimes it's useful to know what all those different files are for..
 /
 ├─ public/
 ├─ src/
-│  ├─ assets/           # Images
-│  │
+│  ├─ @types/           # Global types
 │  ├─ components/       # Reusable components
 │  ├─ contexts/         # Contextos da aplicação, estados globais
 │  ├─ pages/            # Pages
 │  ├─ routes/           # Routes
 │  ├─ services/         # API and request functions;
-│  ├─ styles/           # Global styles
-│  ├─ types/            # Global types
-│  └─ utils/            # Global functions
+│  └─  styles/          # Global styles
 │
-├─ .env                 # Variáveis de ambiente
-├─ .eslintignore        # Regras ignoradas pelo ESLint
-├─ .eslintrc.json       # Preferências do ESLint
-├─ .gitignore           # Arquivos ignorados pelo git
-├─ package.json         # Project manifest
-├─ .prettier.config.js  # Configurações do Prettier
+├─ .gitignore           # Files ignored by git
+├─ index.html           # HTML main file
+├─ package.json         # Libraries and scripts
 ├─ README.md            # This file
-├─ tsconfig.json        # Configurações do Typescript
-└─ yarn.lock            # Configurações do Yarn
+├─ tsconfig.json        # Typescript configurations
+├─ tsconfig.node.json   # Compiler configurations
+└─ vite.config.js       # Vite configurations
 ```
+
+
+>  This is a challenge by [Coodesh](https://coodesh.com/)
