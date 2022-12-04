@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
-    "@types/parse-link-header": "^2.0.0",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26",
     "axios": "^1.2.0",
